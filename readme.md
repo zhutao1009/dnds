@@ -1,5 +1,5 @@
 usage:   
-###############
+###############  
 import dnds   
 seq1='CTGTGCACT'  
 seq2='CTATCCGCT'  
