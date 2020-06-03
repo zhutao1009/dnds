@@ -16,4 +16,7 @@ dn/ds=0.788496
 
 reference:  
 M Nei, T Gojobori, Simple methods for estimating the numbers of synonymous and nonsynonymous nucleotide substitutions., Molecular Biology and Evolution, Volume 3, Issue 5, September 1986, Pages 418–426, https://doi.org/10.1093/oxfordjournals.molbev.a040410  
-##############
+##############  
+email:
+zhutao@cau.edu.cn
+#############
