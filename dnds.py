@@ -125,7 +125,9 @@ def dnds(seq1,seq2):
     assert len(seq1)==len(seq2),'Fatal err:length(seq1)!=length(seq2)'
     assert len(seq1)%3==0,'Fatal err:The length of input seq is not divisible by 3'
     assert seq1!=seq2,'Fatal err:2 sequence is same'
-    sdnd=s_n_seq(seq1)
+    sdnd1=s_n_seq(seq1)
+    sdnd2=s_n_seq(seq2)
+    sdnd=[(sdnd1[0]+sdnd2[0])/2,(sdnd1[1]+sdnd2[1])/2]
     sd=ds_dn_seq(seq1,seq2)
     ps=sd[0]/sdnd[0]
     pn=sd[1]/sdnd[1]
