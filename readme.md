@@ -1,6 +1,6 @@
 
 
-dnds: calculate the dn/ds value of CDS.
+**dnds**: calculate the dn/ds value of CDS.
 
 
 Usage 1:   
