@@ -17,6 +17,12 @@ dn/ds=0.788496
 0.788496  
 
 ## Usage 2:   
+$ cat demo.fa  
+\>a  
+CTGTGCACT  
+\>b  
+CTATCCGCT  
+
 $python dnds.py demo.fa  
 pn=0.315789,ps=0.375000  
 dn=0.409908,ds=0.519860  
