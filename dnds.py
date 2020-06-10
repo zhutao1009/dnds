@@ -139,17 +139,17 @@ def dnds(seq1,seq2):
     return dn/ds
 
 def readfasta(input):
-	with open(input,'r') as f:
-		fasta={}
-		for line in f:
-			line = line.strip()
-			if line[0] == '>':
-				h = line[1:].split(" ")
-				header=h[0]
-			else:
-				sequence = line
-				fasta[header] = fasta.get(header,'') + sequence
-	return fasta
+    with open(input,'r') as f:
+        fasta={}
+        for line in f:
+            line = line.strip()
+            if line[0] == '>':
+                h = line[1:].split(" ")
+                header=h[0]
+            else:
+                sequence = line
+                fasta[header] = fasta.get(header,'') + sequence
+    return fasta
 
 if __name__ == "__main__":
     fa=readfasta(sys.argv[1])
