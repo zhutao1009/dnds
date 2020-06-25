@@ -3,18 +3,27 @@ from aa import codons
 import math
 import sys
 
+#split the sequence
+#print (split_seq('AGACTC',3))
+#['AGA', 'CTC']
 def split_seq(seq,n):
     s=[]
     for i in range(0,len(seq),n):
         s.append(seq[i:i+n])
     return s
 
+#Convert codon to amino acid
+#print (trans_2_condon('AGACTC'))
+#['R', 'L']
 def trans_2_condon(seq):
     codons_list=[]
     for base in split_seq(seq,3):
         codons_list.append(codons[base])
     return codons_list
 
+#find the difference of 2 codon
+#print(diff('ATC','GAC'))
+#[0, 1]
 def diff(codon1,codon2):
     df=[]
     for base in range(0,3):
@@ -22,6 +31,13 @@ def diff(codon1,codon2):
             df.append(base)
     return df
 
+#find the possible pathway of amino acid conversion
+# print(trans([0]))
+# [[0]]
+# print(trans([0,1]))
+# [[0, 1], [1, 0]]
+# print(trans([0,1,2]))
+# [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]
 def trans(l):
     if len(l)==1:
         return [l]
@@ -39,6 +55,22 @@ def trans(l):
 [l[2],l[1],l[0]]
 ]
 
+#find the pathway of of amino acid conversion
+# print(sd_nd(list('AGG'),list('GGG')))
+# AGGGGG
+# AGG GGG
+# print(sd_nd(list('ACG'),list('GGG')))
+# ACGGCGGGGACGAGGGGG
+# ACG GCG GGG
+# ACG AGG GGG
+# print(sd_nd(list('ACT'),list('GGG')))
+# ACTGCTGGTGGGACTGCTGCGGGGACTAGTGGTGGGACTAGTAGGGGGACTACGGCGGGGACTACGAGGGGG
+# ACT GCT GGT GGG
+# ACT GCT GCG GGG
+# ACT AGT GGT GGG
+# ACT AGT AGG GGG
+# ACT ACG GCG GGG
+# ACT ACG AGG GGG
 def sd_nd(codon1,codon2):
     snp_pos=diff(codon1,codon2)
     pathway=trans(snp_pos)
@@ -51,6 +83,10 @@ def sd_nd(codon1,codon2):
             combine=combine+''.join(new_condon)
     return (combine)
 
+
+#return the number of non-synonymous
+# print(count_diff('ARRND'))
+# 3
 def count_diff(aa_list):
     count=0
     for i in range(0,len(aa_list)-1):
@@ -58,6 +94,11 @@ def count_diff(aa_list):
             count+=1
     return count
 
+#Input the out put of function sd_nd(), return sd and nd
+# print(sd_nd_cal('TTTGTTGTATTTTTAGTA'))
+# [0.5, 1.5]
+# print(sd_nd_cal('ACTGCTGGTGGGACTGCTGCGGGGACTAGTGGTGGGACTAGTAGGGGGACTACGGCGGGGACTACGAGGGGG'))
+# [0.8333333333333334, 2.1666666666666665]
 def sd_nd_cal(combine):
     nd=0
     pep=trans_2_condon(combine)
@@ -84,6 +125,9 @@ def test_syno(codon1,codon2):
     else:
         return 0
 
+#Compute the number of synonymous sites (s)
+# print (S_n('TTA'))
+# 2
 def S_n(codon):
     base={'A','G','C','T'}
     s_num=0
@@ -94,7 +138,9 @@ def S_n(codon):
             s_num+=test_syno(codon,new_condon)
     return (s_num)
 
-
+#Calculate the number of synonymous sites (s) and the number of nonsynonymous sites (n) for a sequence
+# print(s_n_seq('TTATTATTA'))
+# [2.0, 7.0]
 def s_n_seq(seq):
     condon_list=split_seq(seq,3)
     sd=0
@@ -103,8 +149,9 @@ def s_n_seq(seq):
     nd=len(condon_list)*3-sd/3
     return [sd/3,nd]
 
-
-
+#Compute the number of synonymous and nonsynonymous nucleotide differences between a pair of homologous sequences
+# print (ds_dn_seq('TTTTTT','GTAGTA'))
+# [1.0, 3.0]
 def ds_dn_seq(seq1,seq2):
     condon_list1=split_seq(seq1,3)
     condon_list2=split_seq(seq2,3)
@@ -121,10 +168,11 @@ def ds_dn_seq(seq1,seq2):
             sd_nd_val[1]+=sd_nd_exp2[1]
     return sd_nd_val
 
+#Compute the dn/ds and pn/ps value
 def dnds(seq1,seq2):
     assert len(seq1)==len(seq2),'Fatal err:length(seq1)!=length(seq2)'
     assert len(seq1)%3==0,'Fatal err:The length of input seq is not divisible by 3'
-    assert seq1!=seq2,'Fatal err:2 sequence is same'
+    assert seq1!=seq2,'Fatal err:2 sequences is same'
     sdnd1=s_n_seq(seq1)
     sdnd2=s_n_seq(seq2)
     sdnd=[(sdnd1[0]+sdnd2[0])/2,(sdnd1[1]+sdnd2[1])/2]
@@ -138,6 +186,7 @@ def dnds(seq1,seq2):
     print ('dn/ds=%f'%(dn/ds))
     return dn/ds
 
+#read a fasta file from file
 def readfasta(input):
     with open(input,'r') as f:
         fasta={}
