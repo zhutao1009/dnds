@@ -2,7 +2,10 @@
 
 # **dnds**: calculate the dn/ds (also include pn and ps) value of CDS.  
 
-
+# Installation
+```shell
+$git clone https://github.com/zhutao1009/dnds.git
+```
 # Usage
 ## Usage 1:   
 ```python
