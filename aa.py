@@ -1,3 +1,4 @@
+#This part come from https://github.com/adelq/dnds.git
 codons = {
     "TTT": "F",
     "TTC": "F",
